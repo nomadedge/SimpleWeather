@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SimpleWeather.Web.Models
+﻿namespace SimpleWeather.Web.Models
 {
     public class Weather
     {
