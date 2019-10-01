@@ -1,5 +1,13 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+@inherits IndexBase
 
-Welcome to your new app.
+<input @bind-value="CityName"
+       @bind-value:event="onchange"
+       />
+
+<button @onclick="DisplayWeatherAsync">
+    Show weather
+</button>
+
+@WeatherRender

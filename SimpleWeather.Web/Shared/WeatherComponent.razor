@@ -1,0 +1,11 @@
+﻿
+<div>Description: @Weather.Description</div>
+<div>Temperature: @Weather.Temperature°C</div>
+<div>Pressure: @Weather.Pressure hPa</div>
+<div>Humidity: @Weather.Humidity%</div>
+<div>Wind speed: @Weather.WindSpeed m/s</div>
+
+@code{
+    [Parameter]
+    public Weather Weather { get; set; }
+}
