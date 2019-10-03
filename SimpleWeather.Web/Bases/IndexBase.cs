@@ -34,23 +34,27 @@ namespace SimpleWeather.Web.Bases
 
             var response = await httpClient.SendAsync(requestMessage);
 
-            if (response.StatusCode != HttpStatusCode.OK)
+            switch (response.StatusCode)
             {
-                WeatherRender = Render.ErrorComponent();
-            }
-            else
-            {
-                var weatherJson = JObject.Parse(await response.Content.ReadAsStringAsync());
+                case HttpStatusCode.OK:
+                    var weatherJson = JObject.Parse(await response.Content.ReadAsStringAsync());
 
-                var weather = new Weather
-                {
-                    Description = (string)weatherJson["weather"][0]["description"],
-                    Temperature = (decimal)weatherJson["main"]["temp"] - 273.15m,
-                    Pressure = (decimal)weatherJson["main"]["pressure"],
-                    Humidity = (decimal)weatherJson["main"]["humidity"],
-                    WindSpeed = (decimal)weatherJson["wind"]["speed"]
-                };
-                WeatherRender = Render.WeatherComponent(weather);
+                    var weather = new Weather
+                    {
+                        Description = (string)weatherJson["weather"][0]["description"],
+                        Temperature = (decimal)weatherJson["main"]["temp"] - 273.15m,
+                        Pressure = (decimal)weatherJson["main"]["pressure"],
+                        Humidity = (decimal)weatherJson["main"]["humidity"],
+                        WindSpeed = (decimal)weatherJson["wind"]["speed"]
+                    };
+                    WeatherRender = Render.WeatherComponent(weather);
+                    break;
+                case HttpStatusCode.NotFound:
+                    WeatherRender = Render.ErrorComponent("City is not found");
+                    break;
+                default:
+                    WeatherRender = Render.ErrorComponent();
+                    break;
             }
         }
     }

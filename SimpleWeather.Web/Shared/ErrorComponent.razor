@@ -1,1 +1,6 @@
-﻿<div>You entered wrong city</div>
+﻿<div>@ErrorMessage</div>
+
+@code{
+    [Parameter]
+    public string ErrorMessage { get; set; }
+}

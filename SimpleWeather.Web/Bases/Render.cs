@@ -13,9 +13,10 @@ namespace SimpleWeather.Web.Bases
             builder.CloseComponent();
         };
 
-        public static RenderFragment ErrorComponent() => builder =>
+        public static RenderFragment ErrorComponent(string errorMessage = "Unknown error") => builder =>
         {
             builder.OpenComponent(0, typeof(ErrorComponent));
+            builder.AddAttribute(1, "ErrorMessage", errorMessage);
             builder.CloseComponent();
         };
 
