@@ -1,9 +1,15 @@
-﻿
-<div>Description: @Weather.Description</div>
-<div>Temperature: @Weather.Temperature°C</div>
-<div>Pressure: @Weather.Pressure hPa</div>
-<div>Humidity: @Weather.Humidity%</div>
-<div>Wind speed: @Weather.WindSpeed m/s</div>
+﻿<div id="result-container">
+    <div id="icon-temp">
+        <div id="icon"><img src="@Weather.IconUrl" alt="Weather icon"></div>
+        <div id="temp">@Weather.Temperature°C</div>
+    </div>
+    <div id="other-param">
+        <div id="description">@Weather.Description</div>
+        <div id="barometer">Barometer @Weather.Pressure hPa</div>
+        <div id="humidity">Humidity @Weather.Humidity%</div>
+        <div id="wind">Wind @Weather.WindSpeed m/s</div>
+    </div>
+</div>
 
 @code{
     [Parameter]

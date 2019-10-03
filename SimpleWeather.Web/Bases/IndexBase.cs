@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json.Linq;
 using SimpleWeather.Web.Models;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
 namespace SimpleWeather.Web.Bases
 {
@@ -17,9 +17,15 @@ namespace SimpleWeather.Web.Bases
         {
             WeatherRender = Render.LoadingComponent();
 
+            if (string.IsNullOrWhiteSpace(CityName))
+            {
+                WeatherRender = Render.ErrorComponent("Empty search. Please type smth");
+                return;
+            }
+            
+            var cityNamePlus = CityName.Trim().Replace(" ", "+");
             //OpenWeatherUri contains API key. It's better to use user secrets for that
             //in development environment but there's a client-side API call.
-            var cityNamePlus = CityName.Replace(" ", "+");
             var openWeatherUri = new Uri(
                 "https://api.openweathermap.org/data/2.5/weather?q=" + cityNamePlus +
                 "&APPID=d5bb735f9e1ce1a846ab736fc9d95dc6");
@@ -41,16 +47,19 @@ namespace SimpleWeather.Web.Bases
 
                     var weather = new Weather
                     {
-                        Description = (string)weatherJson["weather"][0]["description"],
-                        Temperature = (decimal)weatherJson["main"]["temp"] - 273.15m,
+                        Description = char.ToUpper(((string)weatherJson["weather"][0]["description"])[0]) +
+                            ((string)weatherJson["weather"][0]["description"]).Substring(1),
+                        Temperature = (int)Math.Round((decimal)weatherJson["main"]["temp"] - 273.15m),
                         Pressure = (decimal)weatherJson["main"]["pressure"],
                         Humidity = (decimal)weatherJson["main"]["humidity"],
-                        WindSpeed = (decimal)weatherJson["wind"]["speed"]
+                        WindSpeed = (decimal)weatherJson["wind"]["speed"],
+                        IconUrl = "http://openweathermap.org/img/w/" +
+                            (string)weatherJson["weather"][0]["icon"] + ".png"
                     };
                     WeatherRender = Render.WeatherComponent(weather);
                     break;
                 case HttpStatusCode.NotFound:
-                    WeatherRender = Render.ErrorComponent("City is not found");
+                    WeatherRender = Render.ErrorComponent("City not found");
                     break;
                 default:
                     WeatherRender = Render.ErrorComponent();
