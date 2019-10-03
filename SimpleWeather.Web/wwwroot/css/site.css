@@ -1,1 +1,70 @@
-﻿
+﻿* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0; }
+
+#page-container {
+  position: relative;
+  min-height: 100vh; }
+
+header {
+  background-color: deepskyblue;
+  font-size: xx-large;
+  text-align: center;
+  padding: 5pt; }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  background-color: gold; }
+
+#weather-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5pt; }
+
+#city-input {
+  width: 150pt;
+  margin-right: 5pt; }
+
+#show-button {
+  height: inherit; }
+
+#result-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center; }
+
+#icon-temp {
+  display: flex;
+  flex-direction: row; }
+
+#temp {
+  font-size: xx-large; }
+
+#description {
+  font-size: x-large; }
+
+.loader {
+  border: 16px solid hotpink;
+  border-top: 16px solid green;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }

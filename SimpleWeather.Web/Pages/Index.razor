@@ -2,12 +2,17 @@
 
 @inherits IndexBase
 
-<input @bind-value="CityName"
-       @bind-value:event="onchange"
-       />
+<div id="weather-container">
+    <div>
+        <input @bind-value="CityName"
+               @bind-value:event="onchange"
+               id="city-input" />
 
-<button @onclick="DisplayWeatherAsync">
-    Show weather
-</button>
+        <button @onclick="DisplayWeatherAsync"
+                id="show-input">
+            Show weather
+        </button>
+    </div>
 
-@WeatherRender
+    @WeatherRender
+</div>
