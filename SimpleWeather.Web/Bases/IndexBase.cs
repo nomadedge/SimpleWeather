@@ -13,6 +13,13 @@ namespace SimpleWeather.Web.Bases
         public string CityName { get; set; }
         public RenderFragment WeatherRender { get; set; }
 
+        public async Task PressEnter(ChangeEventArgs eventArgs)
+        {
+            CityName = eventArgs.Value as string;
+
+            await DisplayWeatherAsync();
+        }
+
         public async Task DisplayWeatherAsync()
         {
             WeatherRender = Render.LoadingComponent();

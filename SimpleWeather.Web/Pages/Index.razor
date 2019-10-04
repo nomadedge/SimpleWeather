@@ -4,8 +4,7 @@
 
 <div id="weather-container">
     <div>
-        <input @bind-value="CityName"
-               @bind-value:event="onchange"
+        <input @onchange="PressEnter"
                id="city-input" />
 
         <button @onclick="DisplayWeatherAsync"
